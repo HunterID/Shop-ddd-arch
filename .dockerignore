@@ -1,0 +1,12 @@
+.git
+.gitignore
+.dockerignore
+.DS_Store
+.docker
+Dockerfile
+README.md
+node_modules
+dist
+logs
+local-deployment
+*.pem
