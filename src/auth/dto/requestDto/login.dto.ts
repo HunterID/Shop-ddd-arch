@@ -12,7 +12,7 @@ import {
 } from '../../../common/decorators/password-validation.decorator';
 
 export class LoginDto {
-  @IsEmail(null, { message: USERS_VALIDATION_MESSAGES.EMAIL_VALID })
+  @IsEmail({}, { message: USERS_VALIDATION_MESSAGES.EMAIL_VALID })
   @Transform(transformToLowerCase)
   email: string;
 

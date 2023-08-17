@@ -16,7 +16,7 @@ export class RefreshTokenExistGuard implements CanActivate {
 
     if (!user) throw new NotFoundException();
 
-    request.user = { userId: user.userId };
+    request.user = user;
 
     return true;
   }

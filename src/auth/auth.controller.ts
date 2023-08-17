@@ -26,7 +26,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'login' })
   @Post('login')
-  public login(@Body() dto: LoginDto, @Ip() ip: string): Promise<AuthUserResponseDto> {
+  public async login(@Body() dto: LoginDto, @Ip() ip: string): Promise<AuthUserResponseDto> {
     return this.authService.login(dto, ip);
   }
 

@@ -8,9 +8,11 @@ import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions, SwaggerModule } f
 import { ConfigService } from '@nestjs/config';
 
 import { SwaggerConfiguration } from '../configuration/configuration.types';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.set('trust proxy', 1);
   await initializeApp(app);
 }
 

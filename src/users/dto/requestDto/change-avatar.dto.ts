@@ -4,6 +4,6 @@ import { USERS_VALIDATION_MESSAGES } from '../../users.constants';
 
 export class ChangeAvatarDto {
   @ValidateIf(({ avatar }) => !!avatar)
-  @IsUrl(null, { message: USERS_VALIDATION_MESSAGES.AVATAR_VALID })
+  @IsUrl({}, { message: USERS_VALIDATION_MESSAGES.AVATAR_VALID })
   avatar: string;
 }
