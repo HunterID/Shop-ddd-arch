@@ -12,6 +12,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DATABASE_NAME}
+
   redis_shop:
     image: redis:7.0.5
     container_name: redis-shop
@@ -23,3 +24,16 @@ services:
       - redis-server
       - --save ""
       - --appendonly no
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - AWS_DEFAULT_REGION=${S3_REGION}
+      - EDGE_PORT=${S3_EDGE_PORT}
+      - SERVICES=s3
+    ports:
+      - '${S3_PORT}:${S3_PORT}'
+    volumes:
+      - '${LOCALSTACK_VOLUME_DIR:-./.docker/localstack}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - ./aws:/etc/localstack/init/ready.d

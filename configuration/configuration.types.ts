@@ -33,4 +33,13 @@ export type Configuration = {
   postgres: PostgresConfiguration;
   redis: RedisConfiguration;
   swagger: SwaggerConfiguration;
+  s3: S3;
+};
+
+export type S3 = {
+  accessKeyId: string;
+  secretAccessKey: string;
+  region: string;
+  bucketName: string;
+  endpoint: string;
 };

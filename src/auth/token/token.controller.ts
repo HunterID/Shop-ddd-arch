@@ -1,16 +1,15 @@
 import { Controller, ParseIntPipe, Patch, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { TokenService } from './token.service';
 
 import { RefreshTokenExistGuard } from './guards/refreshToken-exist.guard';
 
 import { UpdateTokenDto } from './dto/requestDto/update-token.dto';
-import { JwtTokens } from './interfaces/token.interfaces';
 import { User } from '../../common/decorators/user.decorator';
+import { TokenResponseDto } from './dto/responseDto/tokens.dto';
 
 @ApiTags('Auth')
-@ApiBearerAuth()
 @UseGuards(RefreshTokenExistGuard)
 @Controller('auth/token')
 export class TokenController {
@@ -19,7 +18,7 @@ export class TokenController {
   @ApiOperation({ summary: 'Update access token' })
   @ApiBody({ type: UpdateTokenDto })
   @Patch('update-access')
-  public async updateAccessToken(@User('id', ParseIntPipe) userId: number): Promise<{
+  public async updateAccessToken(@User('userId', ParseIntPipe) userId: number): Promise<{
     accessToken: string;
   }> {
     return this.tokenService.updateAccessToken(userId);
@@ -28,7 +27,7 @@ export class TokenController {
   @ApiOperation({ summary: 'Update refresh token' })
   @ApiBody({ type: UpdateTokenDto })
   @Patch('update-refresh')
-  public async updateRefreshToken(@User('id', ParseIntPipe) userId: number): Promise<JwtTokens> {
+  public async updateRefreshToken(@User('userId', ParseIntPipe) userId: number): Promise<TokenResponseDto> {
     return this.tokenService.updateRefreshToken(userId);
   }
 }
